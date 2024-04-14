@@ -11,7 +11,7 @@ import XCTest
 final class PacketParserTests: XCTestCase {
 
     func testEvaluatedPackets() {
-        let parser = PacketParser(definition: .evaluated({ data in
+        let parser = PacketParser(.evaluated({ data in
             if !data.hasPrefix("!".data(using: .utf8)!) {
                 return false
             }
@@ -74,7 +74,7 @@ final class PacketParserTests: XCTestCase {
     }
 
     func testSimpleRangeDelimitedPackets() {
-        let parser = PacketParser(definition: .rangeDelimited("!".data(using: .utf8)!, ";".data(using: .utf8)!))
+        let parser = PacketParser(.rangeDelimited("!".data(using: .utf8)!, ";".data(using: .utf8)!))
         var packets = parser.packetsByAppending(data: Data())
         XCTAssertTrue(packets.isEmpty)
 
@@ -97,7 +97,7 @@ final class PacketParserTests: XCTestCase {
     }
 
     func testMoreComplexRangeDelimitedPackets() {
-        let parser = PacketParser(definition: .rangeDelimited("!".data(using: .utf8)!, ";".data(using: .utf8)!))
+        let parser = PacketParser(.rangeDelimited("!".data(using: .utf8)!, ";".data(using: .utf8)!))
         var packets = parser.packetsByAppending(data: Data())
         XCTAssertTrue(packets.isEmpty)
 
@@ -127,7 +127,7 @@ final class PacketParserTests: XCTestCase {
     }
 
     func testEndDelimitedPackets() {
-        let parser = PacketParser(definition: .endDelimited(".;".data(using: .utf8)!))
+        let parser = PacketParser(.endDelimited(".;".data(using: .utf8)!))
         var packets = parser.packetsByAppending(data: Data())
         XCTAssertTrue(packets.isEmpty)
 
@@ -158,7 +158,7 @@ final class PacketParserTests: XCTestCase {
     }
 
     func testFixedLengthPackets() {
-        let parser = PacketParser(definition: .fixedLength(5))
+        let parser = PacketParser(.fixedLength(5))
         var packets = parser.packetsByAppending(data: Data())
         XCTAssertTrue(packets.isEmpty)
         

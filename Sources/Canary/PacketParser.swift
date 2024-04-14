@@ -9,7 +9,7 @@ import Foundation
 
 public class PacketParser {
 
-    public init(definition: PacketDefinition) {
+    public init(_ definition: PacketDefinition) {
         self.definition = definition
     }
 
