@@ -6,7 +6,7 @@
 //
 
 import XCTest
-@testable import Pigeon
+@testable import Canary
 
 final class Data_PrefixSuffixTests: XCTestCase {
 

@@ -4,7 +4,7 @@
 import PackageDescription
 
 let package = Package(
-    name: "Pigeon",
+    name: "Canary",
     platforms: [
         .macOS(.v13),
         .iOS(.v16),
@@ -15,16 +15,16 @@ let package = Package(
     products: [
         // Products define the executables and libraries a package produces, making them visible to other packages.
         .library(
-            name: "Pigeon",
-            targets: ["Pigeon"]),
+            name: "Canary",
+            targets: ["Canary"]),
     ],
     targets: [
         // Targets are the basic building blocks of a package, defining a module or a test suite.
         // Targets can depend on other targets in this package and products from dependencies.
         .target(
-            name: "Pigeon"),
+            name: "Canary"),
         .testTarget(
-            name: "PigeonTests",
-            dependencies: ["Pigeon"]),
+            name: "CanaryTests",
+            dependencies: ["Canary"]),
     ]
 )
