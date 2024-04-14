@@ -15,12 +15,21 @@ public class PacketParser {
 
     // MARK: - Public Methods
 
-    public func append(data: Data) {
+    public func append(_ data: Data) {
         buffer.append(data)
     }
 
-    public func packetsByAppending(data: Data) -> [Data] {
-        append(data: data)
+    public func append(_ string: String) {
+        append(string.data(using: .utf8)!)
+    }
+
+    public func packetsByAppending(_ data: Data) -> [Data] {
+        append(data)
+        return popReceivedPackets()
+    }
+
+    public func packetsByAppending(_ string: String) -> [Data] {
+        append(string)
         return popReceivedPackets()
     }
 
