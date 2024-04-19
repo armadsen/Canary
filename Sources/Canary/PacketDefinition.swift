@@ -12,6 +12,7 @@ public enum PacketDefinition {
     case rangeDelimited(prefix: Data, suffix: Data)
     case endDelimited(Data)
     case fixedLength(Int)
+    case fixed(Data)
 }
 
 public extension PacketDefinition {
@@ -22,5 +23,15 @@ public extension PacketDefinition {
 
     static func endDelimited(_ suffix: String) -> PacketDefinition {
         .endDelimited(suffix.data(using: .utf8)!)
+    }
+}
+
+public extension PacketDefinition {
+    init(_ data: Data) {
+        self = .fixed(data)
+    }
+
+    init(_ string: String) {
+        self.init(Data(string.utf8))
     }
 }

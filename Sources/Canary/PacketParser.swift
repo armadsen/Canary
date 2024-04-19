@@ -39,7 +39,8 @@ public class PacketParser {
             return packetsUsing(evaluator: evaluator)
         case .rangeDelimited(let prefix, let suffix):
             return packetsUsingDelimiters(prefix: prefix, suffix: suffix)
-        case .endDelimited(let suffix):
+        case .fixed(let suffix),
+             .endDelimited(let suffix):
             var packets = buffer
                 .split(separator: suffix)
             if !buffer.hasSuffix(suffix) {
@@ -61,11 +62,15 @@ public class PacketParser {
         }
     }
 
+    public func clearBuffer() {
+        buffer.removeAll()
+    }
+
     // MARK: - Public Properties
 
     public let definition: PacketDefinition
 
-    private(set) var buffer = Data()
+    public private(set) var buffer = Data()
 
     // MARK: - Private Methods
 
@@ -124,4 +129,14 @@ public class PacketParser {
     }
 
     // MARK: - Private Properties
+}
+
+public extension PacketParser {
+    convenience init(_ data: Data) {
+        self.init(.fixed(data))
+    }
+
+    convenience init(_ string: String) {
+        self.init(Data(string.utf8))
+    }
 }
